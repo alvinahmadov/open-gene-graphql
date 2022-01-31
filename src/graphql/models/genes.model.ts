@@ -34,10 +34,8 @@ export class Genes implements IGenes
 	public aliases: string[];
 	@Field(() => [SelectionCriteria])
 	public commentCause: SelectionCriteria[];
-	//TODO: Fix GQL type
 	@Field(() => AssociatedDiseaseCategories)
 	public diseaseCategories: AssociatedDiseaseCategories;
-	//TODO: Fix GQL type
 	@Field(() => AssociatedDiseases, Nullable)
 	public diseases?: AssociatedDiseases;
 	@Field({ nullable: true })
@@ -60,8 +58,7 @@ export class Genes implements IGenes
 	public proteinClasses: ProteinClasses[];
 	@Field(() => String)
 	public symbol: string;
-	//TODO: Fix GQL type
-	@Field(() => Terms)
+	@Field(() => Terms, Nullable)
 	public terms: Terms;
 	@Field(() => TimestampObject)
 	public timestamp: TimestampObject | string;
