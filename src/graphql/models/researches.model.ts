@@ -118,6 +118,7 @@ export class ProteinRegulatesGenes extends Research
 	public regulatedGene: RegulatedGene;
 }
 
+@ObjectType()
 export class LongevityEffects extends Research
 {
 	@Field()
@@ -136,6 +137,7 @@ export class LongevityEffects extends Research
 	public sex: string;
 }
 
+@ObjectType()
 export class ProgeriaSyndromes extends Research
 {
 	@Field()
