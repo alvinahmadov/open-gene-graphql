@@ -4,6 +4,7 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { join }          from 'path';
 
 import { RESOLVERS } from 'graphql/resolvers';
+import { SCALARS }   from 'graphql/models';
 import { SERVICES }  from 'services';
 
 @Module({
@@ -16,8 +17,6 @@ import { SERVICES }  from 'services';
 			                              playground:     true,
 		                              }),
 	        ],
-	        providers: [...SERVICES, ...RESOLVERS],
+	        providers: [...SERVICES, ...SCALARS, ...RESOLVERS],
         })
-export class AppModule
-{
-}
+export class AppModule {}
