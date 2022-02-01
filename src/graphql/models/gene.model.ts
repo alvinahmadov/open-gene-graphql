@@ -1,22 +1,22 @@
 import { Field, Int, ObjectType } from '@nestjs/graphql';
 
 import { IGene, Nullable, MethylationCorrelation } from 'common';
-import { AgingMechanisms }                         from './aging-mechanisms.model';
-import {
-	AssociatedDiseaseCategories,
-	AssociatedDiseases
-}                                                  from './associated-diseases.model';
-import { Terms }                                   from './gene-onthology.model';
 import
 {
-	TimestampObject,
 	AgeRelatedProcesses,
+	AgingMechanisms,
+	AssociatedDiseaseCategories,
+	AssociatedDiseases,
+	HumanProteinAtlas,
+	Origin,
 	ProteinClasses,
-	SelectionCriteria
-}                                                  from './generic.model';
-import { HumanProteinAtlas }                       from './human-protein-atlas.model';
-import { Origin }                                  from './origin.model';
-import { Researches }                              from './researches.model';
+	Researches,
+	SelectionCriteria,
+	TimestampObject,
+	Terms
+}                                                  from 'graphql/models';
+
+export declare const Any: import("graphql").GraphQLScalarType;
 
 @ObjectType()
 export class Gene implements IGene
@@ -27,7 +27,7 @@ export class Gene implements IGene
 	public accCds: string;
 	@Field(() => String)
 	public accOrf: string;
-	@Field()
+	@Field(() => Any)
 	public accPromoter: any;
 	@Field(() => [AgingMechanisms])
 	public agingMechanisms: AgingMechanisms[];
@@ -45,13 +45,11 @@ export class Gene implements IGene
 	public commentEvolutionEN: string;
 	@Field(() => Object)
 	public commentsReferenceLinks: { [p: number]: string };
-	//TODO: Fix GQL type
 	@Field(() => AssociatedDiseaseCategories, Nullable)
 	public diseaseCategories?: AssociatedDiseaseCategories;
-	//TODO: Fix GQL type
 	@Field(() => AssociatedDiseases, Nullable)
 	public diseases?: AssociatedDiseases;
-	@Field()
+	@Field(() => [Any])
 	public expression: Array<any>;
 	@Field(() => Int, Nullable)
 	public expressionChange?: number;
@@ -79,7 +77,7 @@ export class Gene implements IGene
 	public orientation: number;
 	@Field(() => Origin, Nullable)
 	public origin: Origin;
-	@Field()
+	@Field(() => Any)
 	public orthologs: { [p: string]: string };
 	@Field(() => [ProteinClasses])
 	public proteinClasses: ProteinClasses[];
