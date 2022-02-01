@@ -1,7 +1,7 @@
-import { Injectable }    from '@nestjs/common';
-import { HttpService }   from '@nestjs/axios';
-import { AxiosResponse } from 'axios';
-import { Observable }    from 'rxjs';
+import { Injectable, Logger } from '@nestjs/common';
+import { HttpService }        from '@nestjs/axios';
+import { AxiosResponse }      from 'axios';
+import { Observable }         from 'rxjs';
 
 import { IFilterOptions, IPagingOptions }          from 'common';
 import { FilteredGenes, ESortOptions, ESortOrder } from 'graphql/models';
@@ -13,6 +13,7 @@ type QueryArgs = Record<string, any>;
 export class ApiService
 {
 	static readonly endpoint = env.OPENGENE_API_ENDPOINT;
+	private readonly logger = new Logger(ApiService.name, { timestamp: true });
 	
 	constructor(private httpService: HttpService) {}
 	
@@ -24,10 +25,18 @@ export class ApiService
 			sortOrder?: ESortOrder
 	): Observable<AxiosResponse<FilteredGenes>>
 	{
+		this.logger.log("Executing .searchGenes(...args)", {
+			lang,
+			paging,
+			filter,
+			sortBy,
+			sortOrder
+		})
+		
 		const query = ApiService._parseQuery(
 				{ 'lang': lang },
 				paging,
-				{ 'filter': filter },
+				filter,
 				{ 'sortBy': sortBy },
 				{ 'sortOrder': sortOrder }
 		);
@@ -46,11 +55,11 @@ export class ApiService
 			if(!arg)
 				continue;
 			
-			for(const entry of Object.entries(arg))
+			for(const [key, value] of Object.entries(arg))
 			{
-				if(!entry || entry[1] === undefined)
+				if(value === undefined)
 					continue;
-				query += `${entry[0]}=${entry[1]}&`;
+				query += `${key}=${value}&`;
 			}
 		}
 		
