@@ -86,15 +86,15 @@ Variables:
 {
   "lang": "en",
   "sortBy": "Default",
-    "sortOrder": "ASC",
-    "paging": {
-      "page": 1,
-      "pageSize": 1
-    },
-    "filter": {
-      "byDiseases": "160",
-      "byDiseaseCategories": "685"
-    }
+  "sortOrder": "ASC", 
+  "paging": {
+    "page": 1,
+    "pageSize": 1
+  },
+  "filter": {
+    "byDiseases": "160",
+    "byDiseaseCategories": "685"
+  }
 }
 ```
 
